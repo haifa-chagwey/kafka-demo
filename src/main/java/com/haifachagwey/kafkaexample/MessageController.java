@@ -11,15 +11,25 @@ import java.time.LocalDateTime;
 @RequestMapping("api/v1/messages")
 public class MessageController {
 
-//    private KafkaTemplate<String, Message> kafkaTemplate;
+    // Kafka take the key as a string and the value as a string
+//    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, Message> kafkaTemplate;
 
-//    public MessageController(KafkaTemplate<String, Message> kafkaTemplate) {
+// Sending a string
+//    public MessageController(KafkaTemplate<String, String> kafkaTemplate) {
 //        this.kafkaTemplate = kafkaTemplate;
 //    }
 
-//    @PostMapping
-//    public void publish(@RequestBody Message request) {
-//        Message message = new Message(request.message(), LocalDateTime.now());
-//        kafkaTemplate.send("amigoscode", message);
-//    }
+    // Sending a custom object
+    public MessageController(KafkaTemplate<String, Message> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    @PostMapping
+    public void publish(@RequestBody Message request) {
+        Message message = new Message(request.message(), LocalDateTime.now());
+//        kafkaTemplate.send("amigoscode", request.message());
+        kafkaTemplate.send("amigoscode", message);
+
+    }
 }

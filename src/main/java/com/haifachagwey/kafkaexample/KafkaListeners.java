@@ -9,9 +9,9 @@ public class KafkaListeners {
     @KafkaListener(
             topics = "amigoscode",
             groupId = "groupId"
-//            containerFactory = "messageFactory"
     )
-    void listener(String data) {
-        System.out.println("Listener received: " + data + "🎉");
+        void listener(String data) {
+        System.out.println("Listener received: " + data + "😊🎉");
     }
+
 }

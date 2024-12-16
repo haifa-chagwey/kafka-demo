@@ -13,7 +13,6 @@ public class KafkaApplication {
     public static void main(String[] args) {
         SpringApplication.run(KafkaApplication.class, args);
     }
-
     // Sending a string to the topic
 //    @Bean
 //    CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate) {
@@ -27,6 +26,7 @@ public class KafkaApplication {
     @Bean
     CommandLineRunner commandLineRunner(KafkaTemplate<String, Message> kafkaTemplate) {
         return args -> {
+//            Pushing 10 events to the topic
             for (int i = 0; i < 9; i++) {
                 kafkaTemplate.send("amigoscode", new Message("Hello Kafka :)", LocalDateTime.now()));
             }
